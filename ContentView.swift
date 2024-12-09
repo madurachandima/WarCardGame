@@ -15,6 +15,8 @@ struct ContentView: View {
     @State var playerScore = 0
     @State var cpuScore = 0
     
+    @State var IsRetry = false
+    
     var body: some View {
     
         ZStack{
@@ -62,6 +64,13 @@ struct ContentView: View {
                     Spacer()
                 }.foregroundColor(.white)
                 Spacer()
+                if IsRetry{
+                    Text("Re-Try")
+                        .font(.title2)
+                        .padding(10)
+                        .foregroundColor(.red)
+                }
+              
             }
             
            
@@ -70,6 +79,7 @@ struct ContentView: View {
     }
     
     func deal(){
+        IsRetry = false
         let playerCardValue = Int.random(in: 2...14)
         let cpuCardValue = Int.random(in: 2...14)
         
@@ -82,7 +92,7 @@ struct ContentView: View {
         }else if cpuCardValue > playerCardValue {
             cpuScore += 1
         }else{
-            
+            IsRetry = true
         }
     }
 }
